@@ -1,4 +1,4 @@
-# Proyecto REHAB · Clasificación de actividades de rehabilitación
+# Proyecto REHAB 
 
 **Selección y comparación de modelos de aprendizaje máquina para reconocer 16 actividades a partir de sensores inerciales y un guante de flexión.**
 
