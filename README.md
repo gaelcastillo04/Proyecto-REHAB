@@ -1,21 +1,10 @@
-<div align="center">
-
-# 🦾 Proyecto REHAB · Clasificación de actividades de rehabilitación
+# Proyecto REHAB · Clasificación de actividades de rehabilitación
 
 **Selección y comparación de modelos de aprendizaje máquina para reconocer 16 actividades a partir de sensores inerciales y un guante de flexión.**
 
-![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9.1-F7931E?logo=scikit-learn&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-2.5.3-013243?logo=numpy&logoColor=white)
-![pandas](https://img.shields.io/badge/pandas-3.0.5-150458?logo=pandas&logoColor=white)
-![Modelo ganador](https://img.shields.io/badge/Modelo%20ganador-Random%20Forest-2ea44f)
-![Accuracy test](https://img.shields.io/badge/Accuracy%20test-95.67%25-blue)
-
-</div>
-
 ---
 
-## 📌 Resumen ejecutivo
+## Resumen ejecutivo
 
 | | |
 |---|---|
@@ -28,21 +17,21 @@
 
 ---
 
-## 📚 Tabla de contenido
+## Tabla de contenido
 
-1. [Estructura del proyecto](#-1-estructura-del-proyecto)
-2. [Identificación del problema](#-2-identificación-del-problema)
-3. [Los datos y su compatibilidad con los modelos](#-3-los-datos-y-su-compatibilidad-con-los-modelos)
-4. [Metodología de evaluación](#-4-metodología-de-evaluación)
-5. [Modelos investigados y configuraciones probadas](#-5-modelos-investigados-y-configuraciones-probadas)
-6. [Resultados](#-6-resultados)
-7. [Decisión final y justificación](#-7-decisión-final-y-justificación)
-8. [Cómo ejecutar](#-8-cómo-ejecutar)
-9. [Limitaciones y trabajo futuro](#-9-limitaciones-y-trabajo-futuro)
+1. [Estructura del proyecto](#1-estructura-del-proyecto)
+2. [Identificación del problema](#2-identificación-del-problema)
+3. [Los datos y su compatibilidad con los modelos](#3-los-datos-y-su-compatibilidad-con-los-modelos)
+4. [Metodología de evaluación](#4-metodología-de-evaluación)
+5. [Modelos investigados y configuraciones probadas](#5-modelos-investigados-y-configuraciones-probadas)
+6. [Resultados](#6-resultados)
+7. [Decisión final y justificación](#7-decisión-final-y-justificación)
+8. [Cómo ejecutar](#8-cómo-ejecutar)
+9. [Limitaciones y trabajo futuro](#9-limitaciones-y-trabajo-futuro)
 
 ---
 
-## 🗂️ 1. Estructura del proyecto
+## 1. Estructura del proyecto
 
 ```text
 Proyecto-REHAB/
@@ -62,7 +51,7 @@ Proyecto-REHAB/
 ├── arboles_de_decision.py        # Modelo 2 · Árbol de decisión
 ├── bayes.py                      # Modelo 3 · Naive Bayes gaussiano
 ├── knn.py                        # Modelo 4 · K-Nearest Neighbors
-├── random-forest.py              # Modelo 5 · Random Forest  ⭐ seleccionado
+├── random-forest.py              # Modelo 5 · Random Forest  seleccionado
 │
 ├── requirements.txt              # numpy, pandas, scikit-learn
 ├── .gitignore                    # .venv/ y __pycache__/
@@ -73,7 +62,7 @@ Todos los scripts de modelos comparten el mismo flujo, definido en `data_utils.p
 
 ---
 
-## 🎯 2. Identificación del problema
+## 2. Identificación del problema
 
 La variable objetivo `actividad` toma **16 valores discretos (0–15)** que representan **categorías** de ejercicios de rehabilitación. No existe orden ni distancia entre ellas: la actividad 7 no es "mayor" que la 3.
 
@@ -83,7 +72,7 @@ Por lo tanto el problema es de **clasificación supervisada multiclase**, no de 
 
 ---
 
-## 🔬 3. Los datos y su compatibilidad con los modelos
+## 3. Los datos y su compatibilidad con los modelos
 
 ### 3.1 Origen y transformación
 
@@ -120,15 +109,15 @@ Al tener características **numéricas, densas, sin faltantes y con etiqueta cat
 
 | Familia | Frontera de decisión | ¿Necesita escalar? | Por qué se incluyó |
 |---|---|---|---|
-| Regresión logística | Lineal | ✅ Sí | Base sólida e interpretable; prueba si las clases son linealmente separables |
-| Árbol de decisión | Ejes paralelos, no lineal | ❌ No | Captura umbrales e interacciones sin suposiciones sobre la distribución |
-| Naive Bayes gaussiano | Cuadrática | ⚪ Opcional | Muy rápido; prueba si la independencia condicional entre features es razonable |
-| K-Nearest Neighbors | Arbitraria (local) | ✅ Sí | No paramétrico; aprovecha que repeticiones de una misma actividad producen vectores estadísticos muy parecidos |
-| Random Forest | Ejes paralelos, no lineal (ensamble) | ❌ No | Promedia muchos árboles entrenados con muestras y features distintas; reduce la varianza del árbol individual y tolera features redundantes |
+| Regresión logística | Lineal | Sí | Base sólida e interpretable; prueba si las clases son linealmente separables |
+| Árbol de decisión | Ejes paralelos, no lineal | No | Captura umbrales e interacciones sin suposiciones sobre la distribución |
+| Naive Bayes gaussiano | Cuadrática | Opcional | Muy rápido; prueba si la independencia condicional entre features es razonable |
+| K-Nearest Neighbors | Arbitraria (local) | Sí | No paramétrico; aprovecha que repeticiones de una misma actividad producen vectores estadísticos muy parecidos |
+| Random Forest | Ejes paralelos, no lineal (ensamble) | No | Promedia muchos árboles entrenados con muestras y features distintas; reduce la varianza del árbol individual y tolera features redundantes |
 
 ---
 
-## 🧪 4. Metodología de evaluación
+## 4. Metodología de evaluación
 
 Para que la selección de modelo sea honesta y reproducible se siguió el mismo protocolo en los cinco scripts:
 
@@ -152,7 +141,7 @@ Para que la selección de modelo sea honesta y reproducible se siguió el mismo 
 
 ---
 
-## 🤖 5. Modelos investigados y configuraciones probadas
+## 5. Modelos investigados y configuraciones probadas
 
 ### 5.1 Regresión logística · `regresion_logistica.py`
 
@@ -328,7 +317,7 @@ Ensamble de árboles de decisión. Cada árbol se entrena con una muestra *boots
 
 ---
 
-## 📊 6. Resultados
+## 6. Resultados
 
 ### 6.1 Comparación final en el conjunto de test
 
@@ -336,9 +325,9 @@ Cada modelo fue reentrenado con train + validación usando su mejor configuraci�
 
 | # | Modelo | Mejor configuración | Accuracy | Precision macro | Recall macro | **F1-macro** |
 |---|---|---|---|---|---|---|
-| 🥇 | **Random Forest** | 100 árboles, depth=None, balanced | **95.67 %** | **0.9576** | **0.9570** | **0.9556** |
-| 🥈 | K-Nearest Neighbors | K=1, euclidiana, estandarizado | 92.89 % | 0.9332 | 0.9304 | 0.9291 |
-| 🥉 | Regresión logística | C=1.0, balanced, OvR | 88.56 % | 0.8841 | 0.8846 | 0.8831 |
+| 1 | **Random Forest** | 100 árboles, depth=None, balanced | **95.67 %** | **0.9576** | **0.9570** | **0.9556** |
+| 2 | K-Nearest Neighbors | K=1, euclidiana, estandarizado | 92.89 % | 0.9332 | 0.9304 | 0.9291 |
+| 3 | Regresión logística | C=1.0, balanced, OvR | 88.56 % | 0.8841 | 0.8846 | 0.8831 |
 | 4 | Árbol de decisión | entropy, depth=10, balanced | 85.79 % | 0.8576 | 0.8577 | 0.8545 |
 | 5 | Naive Bayes gaussiano | var_smoothing=1e-9, priors uniforme | 74.70 % | 0.7634 | 0.7510 | 0.7406 |
 
@@ -421,11 +410,11 @@ Todos los modelos generalizan de forma estable: la diferencia entre validación 
 
 ---
 
-## ✅ 7. Decisión final y justificación
+## 7. Decisión final y justificación
 
 ### Modelo seleccionado: **Random Forest con 100 árboles, sin límite de profundidad y `class_weight="balanced"`**
 
-Las razones, en orden de importancia:
+Las razones, por las que se opto por esta decisión:
 
 1. **Es el mejor en todas las métricas de test**, con una ventaja de 2.8 puntos de accuracy y 0.027 de F1-macro sobre el segundo lugar (KNN). Con 1 154 muestras de test, esa diferencia equivale a ≈ 32 repeticiones más clasificadas correctamente. Frente a la regresión logística la ventaja es de 7.1 puntos.
 
@@ -435,24 +424,23 @@ Las razones, en orden de importancia:
 
 4. **Encaja con la naturaleza de los datos.** Las 480 características son altamente redundantes (estadísticos correlacionados de un mismo canal). El submuestreo aleatorio de características en cada nodo hace que distintos árboles exploten distintas variables redundantes, y el promedio cancela el ruido. Esto explica el salto del árbol individual (85.8 %) al ensamble (95.7 %): la misma familia de hipótesis, pero con la varianza controlada.
 
-5. **No requiere estandarización ni supuestos sobre la distribución**, lo que simplifica el pipeline de producción, y además expone la importancia de cada característica, útil para una futura selección de features.
 
 ### Por qué se descartaron los demás
 
 | Modelo | Motivo de descarte |
 |---|---|
-| K-Nearest Neighbors | Muy buen desempeño (92.9 %) pero 2.8 puntos por debajo. K=1 es sensible al ruido y su inferencia requiere comparar contra todo el conjunto de entrenamiento. Se conserva como **segunda alternativa** por su simplicidad. |
+| K-Nearest Neighbors | Muy buen desempeño (92.9 %) pero 2.8 puntos por debajo.Al igual, K=1 es sensible al ruido y su inferencia requiere comparar contra todo el conjunto de entrenamiento. Se conserva como **segunda alternativa** por su simplicidad. |
 | Regresión logística | 88.6 %. Su frontera lineal confunde sistemáticamente actividades 9, 11 y 12. Sigue siendo la opción recomendada si se prioriza interpretabilidad de pesos o inferencia en un dispositivo con recursos muy limitados. |
 | Árbol de decisión | 85.8 %. Un solo árbol con 480 features es inestable y tiende a sobreajustar; el ensamble de árboles corrige exactamente ese problema, por lo que queda superado por Random Forest. |
 | Naive Bayes | 74.7 %. El supuesto de independencia condicional se viola gravemente; ningún hiperparámetro lo corrige. Se descarta por completo. |
 
 ### Riesgo conocido de la decisión
 
-Random Forest es el modelo más pesado de los cinco: entrenar las 36 configuraciones tarda varios minutos y el modelo final almacena 100 árboles completamente crecidos. Se aceptó este costo porque **(a)** el entrenamiento se hace una sola vez y la inferencia con 100 árboles sigue siendo rápida (milisegundos por muestra), y **(b)** la ganancia de casi 3 puntos sobre KNN y 7 sobre la regresión logística justifica el uso de memoria adicional. Si el sistema tuviera que correr en un microcontrolador, se recomienda reducir a 50 árboles con `max_depth=10`, configuración que aún alcanza 0.953 de F1-macro en validación.
+Random Forest es el modelo más pesado de los cinco: entrenar las 36 configuraciones tarda varios minutos y el modelo final almacena 100 árboles completamente crecidos. Se aceptó este costo porque el entrenamiento se hace una sola vez y la inferencia con 100 árboles sigue siendo rápida (milisegundos por muestra), y porque la ganancia de casi 3 puntos sobre KNN y 7 sobre la regresión logística justifica el uso de memoria adicional.
 
 ---
 
-## 🚀 8. Cómo ejecutar
+## 8. Cómo ejecutar
 
 ### Requisitos
 
@@ -475,7 +463,7 @@ Lee los `.npy` de `Dataset/` y produce `dataset_ml_ventanas.csv`. El archivo ya 
 ### Paso 2 · Entrenar y evaluar los modelos
 
 ```bash
-python random-forest.py          # ⭐ modelo seleccionado (tarda unos minutos: 36 configuraciones)
+python random-forest.py          #  modelo seleccionado (tarda unos minutos: 36 configuraciones)
 python knn.py
 python regresion_logistica.py
 python arboles_de_decision.py
@@ -497,7 +485,7 @@ Gracias a la semilla fija (`SEMILLA = 42` en `config.py`) los resultados son **r
 
 ---
 
-## ⚠️ 9. Limitaciones y trabajo futuro
+## 9. Limitaciones y trabajo futuro
 
 - **Validación simple, no cruzada.** Se usó una única partición 50/25/25. Una validación cruzada estratificada de 5 pliegues daría intervalos de confianza para las métricas y permitiría afirmar con más seguridad que la diferencia entre Random Forest y KNN no depende de la partición.
 - **La actividad 11 es el punto débil** del modelo seleccionado: absorbe muestras de las actividades 4 y 12. Convendría analizar qué tienen en común esos movimientos y añadir características específicas (por ejemplo, del dominio de la frecuencia o de la correlación entre sensores).
