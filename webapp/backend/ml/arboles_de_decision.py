@@ -10,7 +10,7 @@ from sklearn.metrics import (
     confusion_matrix
 )
 
-from data_utils import (
+from scripts.data_utils import (
     cargar_dataset,
     dividir_dataset
 )

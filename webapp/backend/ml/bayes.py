@@ -12,7 +12,7 @@ from sklearn.metrics import (
     log_loss
 )
 
-from data_utils import (
+from scripts.data_utils import (
     cargar_dataset,
     dividir_dataset
 )

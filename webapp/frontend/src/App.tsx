@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { MODEL_COLOR, api, f4 } from './api'
 import { Leaderboard, bestPerModel } from './components/Leaderboard'
 import { ModelLab } from './components/ModelLab'
+import { Presentation } from './components/Presentation'
 import type { DatasetInfo, Job, ModelSpec, ParamValue, RunResult } from './types'
 
 type View = 'board' | string
@@ -94,6 +95,19 @@ export default function App() {
   const busy = job?.status === 'running' || queue.length > 0
   const current = models.find((m) => m.id === view) ?? null
 
+  // presentación: #slides o #slides/N (N = número de slide, 1-based)
+  const slideIndex = useMemo(() => {
+    if (!view.startsWith('slides')) return -1
+    const n = Number(view.split('/')[1] ?? '1')
+    return Number.isFinite(n) && n > 0 ? n - 1 : 0
+  }, [view])
+  const setSlide = useCallback((i: number) => setView(`slides/${i + 1}`), [])
+  const exitSlides = useCallback(() => setView('board'), [])
+
+  if (slideIndex >= 0) {
+    return <Presentation initial={slideIndex} onIndex={setSlide} onExit={exitSlides} />
+  }
+
   return (
     <div className="app">
       <aside className="sidebar">
@@ -130,6 +144,13 @@ export default function App() {
         </nav>
 
         <div className="sidebar-foot">
+          <button className="present-btn" onClick={() => setView('slides/1')} title="Abrir la presentación del reto">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" />
+            </svg>
+            <span className="label">Presentación</span>
+            <span className="kbd">↗</span>
+          </button>
           {busy && job && (
             <div className="status">
               <div className="progress"><div style={{ width: `${Math.max(5, job.progress * 100)}%` }} /></div>

@@ -27,7 +27,8 @@
 6. [Resultados](#6-resultados)
 7. [Decisión final y justificación](#7-decisión-final-y-justificación)
 8. [Cómo ejecutar](#8-cómo-ejecutar)
-9. [Limitaciones y trabajo futuro](#9-limitaciones-y-trabajo-futuro)
+9. [Consideraciones éticas y normativas](#9-consideraciones-éticas-y-normativas)
+10. [Limitaciones y trabajo futuro](#10-limitaciones-y-trabajo-futuro)
 
 ---
 
@@ -40,27 +41,33 @@ Proyecto-REHAB/
 │   ├── 000_1.npy  000_2.npy      #   XXX_1 → 2 sensores inerciales
 │   ├── ...                       #   XXX_2 → guante de flexión
 │   └── 015_1.npy  015_2.npy
-│
-├── crear_dataset_ventanas.py     # Ingeniería de características (señal → 480 features)
 ├── dataset_ml_ventanas.csv       # Dataset tabular generado (4 616 × 482)
 │
-├── config.py                     # Ruta del CSV y semilla global (42)
-├── data_utils.py                 # Carga y división estratificada 50/25/25
+├── webapp/
+│   ├── backend/                  # Todo el código Python
+│   │   ├── ml/                   #   Un script por modelo (búsqueda en malla + evaluación)
+│   │   │   ├── regresion_logistica.py    # Modelo 1 · Regresión logística (One-vs-Rest)
+│   │   │   ├── arboles_de_decision.py    # Modelo 2 · Árbol de decisión
+│   │   │   ├── bayes.py                  # Modelo 3 · Naive Bayes gaussiano
+│   │   │   ├── knn.py                    # Modelo 4 · K-Nearest Neighbors
+│   │   │   └── random_forest.py          # Modelo 5 · Random Forest  seleccionado
+│   │   ├── scripts/              #   Pipeline compartido
+│   │   │   ├── config.py                 # Rutas (Dataset/, CSV) y semilla global (42)
+│   │   │   ├── data_utils.py             # Carga y división estratificada 50/25/25
+│   │   │   └── crear_dataset_ventanas.py # Ingeniería de características (señal → 480 features)
+│   │   ├── api/                  #   API FastAPI de la interfaz web
+│   │   │   ├── main.py                   # Endpoints; entrena los modelos bajo demanda
+│   │   │   └── models.py                 # Registro de modelos e hiperparámetros expuestos
+│   │   └── requirements.txt      #   fastapi, uvicorn
+│   └── frontend/                 # GUI React (Vite) para entrenar y comparar modelos
 │
-├── regresion_logistica.py        # Modelo 1 · Regresión logística (One-vs-Rest)
-├── arboles_de_decision.py        # Modelo 2 · Árbol de decisión
-├── bayes.py                      # Modelo 3 · Naive Bayes gaussiano
-├── knn.py                        # Modelo 4 · K-Nearest Neighbors
-├── random-forest.py              # Modelo 5 · Random Forest  seleccionado
-│
-├── webapp/                       # GUI: FastAPI + React para entrenar y comparar modelos
-│
+├── Makefile                      # make install / make models / make dev
 ├── requirements.txt              # numpy, pandas, scikit-learn
 ├── .gitignore                    # .venv/ y __pycache__/
 └── README.md
 ```
 
-Todos los scripts de modelos comparten el mismo flujo, definido en `data_utils.py`, para que la comparación sea justa: mismos datos, misma división, misma semilla, mismas métricas.
+Todos los scripts de modelos viven en `webapp/backend/ml/` y comparten el mismo flujo, definido en `scripts/data_utils.py`, para que la comparación sea justa: mismos datos, misma división, misma semilla, mismas métricas.
 
 ---
 
@@ -263,7 +270,7 @@ Clasifica cada repetición según la actividad mayoritaria de sus K vecinos más
 
 **Mejor configuración:** `K=1`, `weights="uniform"` (con K=1 ambos tipos de peso son idénticos, porque solo vota un vecino). El rendimiento **decrece monótonamente al aumentar K**, y `distance` siempre supera a `uniform` para K > 1. Esto revela la geometría de los datos: cada repetición tiene un vecino casi idéntico de su misma actividad, pero al ampliar el vecindario entran ejemplos de actividades parecidas que contaminan el voto.
 
-### 5.5 Random Forest · `random-forest.py`
+### 5.5 Random Forest · `random_forest.py`
 
 Ensamble de árboles de decisión. Cada árbol se entrena con una muestra *bootstrap* del conjunto de entrenamiento y, en cada nodo, solo considera un subconjunto aleatorio de las 480 características (√480 ≈ 22). La predicción final es el voto mayoritario de todos los árboles. Se paraleliza con `n_jobs=-1`.
 
@@ -444,33 +451,73 @@ Random Forest es el modelo más pesado de los cinco: entrenar las 36 configuraci
 
 ## 8. Cómo ejecutar
 
-### Requisitos
+Guía **desde cero**: parte de una máquina sin nada del proyecto instalado. Todos los comandos se ejecutan
+desde la raíz del repositorio (`Proyecto-REHAB/`).
+
+### Paso 0 · Requisitos del sistema
+
+Solo hacen falta estas herramientas; el resto se instala automáticamente en el Paso 2.
+
+| Herramienta | Versión | Comprobar |
+|---|---|---|
+| Git | cualquiera | `git --version` |
+| Python | 3.11 o superior | `python3 --version` |
+| GNU Make | cualquiera | `make --version` |
+| Node.js + npm | Node 20 o superior | `node --version && npm --version` |
+
+Node y npm solo se necesitan para la interfaz web (Paso 4). Si únicamente vas a correr los scripts de
+modelos, basta con Git, Python y Make.
+
+### Paso 1 · Clonar el repositorio
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+git clone https://github.com/gaelcastillo04/Proyecto-REHAB.git
+cd Proyecto-REHAB
 ```
 
-`requirements.txt` fija las versiones exactas usadas para obtener los resultados de este documento: `numpy==2.5.3`, `pandas==3.0.5` y `scikit-learn==1.9.1`.
-
-### Paso 1 · Generar el dataset tabular (opcional, ya incluido)
+### Paso 2 · Instalar dependencias
 
 ```bash
-python crear_dataset_ventanas.py
+make install
 ```
 
-Lee los `.npy` de `Dataset/` y produce `dataset_ml_ventanas.csv`. El archivo ya está en el repositorio, así que este paso solo es necesario si se modifican las señales o la extracción de características.
+Esto hace, en orden:
 
-### Paso 2 · Entrenar y evaluar los modelos
+1. Crea el entorno virtual `.venv/` en la raíz del proyecto (si no existe).
+2. Instala `requirements.txt` (numpy, pandas, scikit-learn, con versiones fijas) y
+   `webapp/backend/requirements.txt` (fastapi, uvicorn) dentro de `.venv/`.
+3. Ejecuta `npm install` en `webapp/frontend/`.
+
+No hace falta activar el entorno: todos los targets del `Makefile` usan `.venv/bin/python` directamente.
+Volver a ejecutar `make install` es seguro; si nada cambió responde `Nothing to be done`.
+
+> **Sin Make** (por ejemplo en Windows sin WSL):
+> ```bash
+> python -m venv .venv
+> source .venv/bin/activate          # Windows: .venv\Scripts\activate
+> pip install -r requirements.txt -r webapp/backend/requirements.txt
+> cd webapp/frontend && npm install && cd ../..
+> ```
+
+`requirements.txt` fija las versiones exactas usadas para obtener los resultados de este documento:
+`numpy==2.5.3`, `pandas==3.0.5` y `scikit-learn==1.9.1`.
+
+### Paso 3 · Entrenar y evaluar los modelos
 
 ```bash
-python random-forest.py          #  modelo seleccionado (tarda unos minutos: 36 configuraciones)
-python knn.py
-python regresion_logistica.py
-python arboles_de_decision.py
-python bayes.py
+make models
 ```
+
+Ejecuta los cinco scripts de `webapp/backend/ml/` en este orden: `random_forest.py` (tarda unos
+minutos: 36 configuraciones), `knn.py`, `regresion_logistica.py`, `arboles_de_decision.py` y `bayes.py`.
+Para correr uno solo:
+
+```bash
+make model M=knn                 # logreg | tree | bayes | knn | rf
+```
+
+(equivale a `cd webapp/backend && ../../.venv/bin/python -m ml.knn`; los scripts se ejecutan como
+módulos para que encuentren el paquete `scripts/`, y las rutas al CSV se resuelven en `scripts/config.py`).
 
 Cada script imprime, en este orden:
 
@@ -481,21 +528,77 @@ Cada script imprime, en este orden:
 5. Reporte por clase y matriz de confusión.
 6. Las primeras 20 predicciones frente a su valor real.
 
-Gracias a la semilla fija (`SEMILLA = 42` en `config.py`) los resultados son **reproducibles** y coinciden con los reportados en este documento.
+Gracias a la semilla fija (`SEMILLA = 42` en `webapp/backend/scripts/config.py`) los resultados son **reproducibles** y coinciden
+con los reportados en este documento.
 
-### Paso 3 · Interfaz web (opcional)
+> `random_forest.py` muestra una advertencia de scikit-learn (`X has feature names, but
+> RandomForestClassifier was fitted without feature names`). Ocurre porque el modelo final se entrena con
+> arreglos de NumPy (train + val concatenados) y se evalúa con un DataFrame. Es inofensiva y no afecta los
+> resultados.
 
-`webapp/` contiene una GUI (FastAPI + React) para entrenar cada modelo con distintos hiperparámetros desde el navegador y comparar visualmente los resultados: ranking, veredicto, matriz de confusión y F1 por actividad. Ver [webapp/README.md](webapp/README.md).
+### Paso 4 · Interfaz web (opcional)
 
 ```bash
-./webapp/dev.sh        # http://localhost:5173
+make dev
 ```
 
-> `random-forest.py` muestra una advertencia de scikit-learn (`X has feature names, but RandomForestClassifier was fitted without feature names`). Ocurre porque el modelo final se entrena con arreglos de NumPy (train + val concatenados) y se evalúa con un DataFrame. Es inofensiva y no afecta los resultados.
+Levanta el backend FastAPI en `http://localhost:8000` y el frontend Vite en **`http://localhost:5173`**;
+abre esa dirección en el navegador. `Ctrl+C` detiene ambos. Si el puerto 5173 está ocupado, Vite elige el
+siguiente libre y lo imprime en la terminal.
+
+Desde la interfaz se puede entrenar cada modelo con distintos hiperparámetros y comparar visualmente los
+resultados: ranking, veredicto, matriz de confusión y F1 por actividad. Ver [webapp/README.md](webapp/README.md).
+
+La misma interfaz incluye la **presentación del reto** (botón *Presentación* al pie de la barra lateral, o
+directamente `http://localhost:5173/#slides/1`): definición del problema, datos, approach, resultados,
+diagnóstico del modelo, despliegue, contribuciones personales y conclusiones. Se navega con `←` / `→`,
+`F` pone pantalla completa y `Esc` regresa al laboratorio. No necesita el backend.
+
+También se pueden levantar por separado con `make backend` y `make frontend`.
+
+### Paso 5 (opcional) · Regenerar el dataset tabular
+
+```bash
+make dataset
+```
+
+Lee los `.npy` de `Dataset/` y produce `dataset_ml_ventanas.csv`. El archivo ya está en el repositorio,
+así que este paso solo es necesario si se modifican las señales o la extracción de características.
+
+### Resumen de targets
+
+| Comando | Qué hace |
+|---|---|
+| `make install` | Crea `.venv/` e instala todas las dependencias (Python + frontend) |
+| `make models` | Entrena y evalúa los cinco modelos en terminal |
+| `make model M=knn` | Entrena uno solo (`logreg`, `tree`, `bayes`, `knn`, `rf`) |
+| `make dev` | Interfaz web: backend + frontend juntos |
+| `make backend` / `make frontend` | Cada servidor por separado |
+| `make dataset` | Regenera `dataset_ml_ventanas.csv` |
+| `make clean` | Borra `.venv/`, `node_modules/` y `__pycache__/` para empezar de cero |
+| `make help` | Lista los targets |
 
 ---
 
-## 9. Limitaciones y trabajo futuro
+## 9. Consideraciones éticas y normativas
+
+- **Origen y consentimiento de los datos.** REHAB es un dataset público publicado en *Scientific Data* (2026)
+  bajo licencia abierta; los autores reportan aprobación de comité de ética y consentimiento informado de los
+  participantes. Este proyecto solo usa las señales cinemáticas de los 16 movimientos de entrenamiento y no
+  contiene información personal identificable (nombres, fechas, historial clínico).
+- **Uso previsto.** El modelo reconoce *qué* ejercicio se ejecutó; no diagnostica ni mide la calidad del
+  movimiento ni sustituye la evaluación de un fisioterapeuta o médico. Cualquier uso clínico real requeriría
+  validación con pacientes distintos a los del dataset y cumplimiento de la normatividad de dispositivos
+  médicos y de datos de salud aplicable (en México, NOM-024-SSA3-2012 sobre expedientes clínicos electrónicos y
+  la Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados / LFPDPPP).
+- **Transparencia y reproducibilidad.** Todo el código, la división de datos, la semilla y las versiones de
+  las bibliotecas están en el repositorio; los resultados reportados se pueden regenerar con `make models`.
+- **Sesgo del dataset.** Las señales provienen de un número limitado de sujetos y de un protocolo controlado;
+  el desempeño puede no transferirse a otros pacientes, sensores o entornos domésticos.
+
+---
+
+## 10. Limitaciones y trabajo futuro
 
 - **Validación simple, no cruzada.** Se usó una única partición 50/25/25. Una validación cruzada estratificada de 5 pliegues daría intervalos de confianza para las métricas y permitiría afirmar con más seguridad que la diferencia entre Random Forest y KNN no depende de la partición.
 - **La actividad 11 es el punto débil** del modelo seleccionado: absorbe muestras de las actividades 4 y 12. Convendría analizar qué tienen en común esos movimientos y añadir características específicas (por ejemplo, del dominio de la frecuencia o de la correlación entre sensores).

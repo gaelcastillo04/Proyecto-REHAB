@@ -6,11 +6,9 @@ de modo que los resultados coinciden con los scripts y con el README.
     uvicorn main:app --reload --port 8000     (desde webapp/backend)
 """
 import queue
-import sys
 import threading
 import time
 import uuid
-from pathlib import Path
 
 import numpy as np
 from fastapi import FastAPI, HTTPException
@@ -21,11 +19,9 @@ from sklearn.metrics import (
     precision_recall_fscore_support, precision_score, recall_score,
 )
 
-PROJECT_DIR = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(PROJECT_DIR))
-import config  # noqa: E402
-from data_utils import cargar_dataset, dividir_dataset  # noqa: E402
-from models import (  # noqa: E402
+from scripts import config
+from scripts.data_utils import cargar_dataset, dividir_dataset
+from api.models import (
     MODEL_ORDER, MODELS, coerce_params, default_params, public_spec,
 )
 
@@ -42,7 +38,7 @@ _data_lock = threading.Lock()
 def get_data():
     with _data_lock:
         if not _data:
-            X, y = cargar_dataset(str(PROJECT_DIR / config.DATASET_CSV))
+            X, y = cargar_dataset(config.DATASET_CSV)
             X_train, X_val, X_test, y_train, y_val, y_test = dividir_dataset(X, y)
             _data.update(
                 X_train=X_train.to_numpy(), X_val=X_val.to_numpy(), X_test=X_test.to_numpy(),
@@ -163,7 +159,7 @@ _FEATURE_NAMES = []
 def _feature_names():
     if not _FEATURE_NAMES:
         import pandas as pd
-        cols = pd.read_csv(str(PROJECT_DIR / config.DATASET_CSV), nrows=0).columns
+        cols = pd.read_csv(config.DATASET_CSV, nrows=0).columns
         _FEATURE_NAMES.extend(c for c in cols if c not in ("actividad", "repeticion"))
     return _FEATURE_NAMES
 

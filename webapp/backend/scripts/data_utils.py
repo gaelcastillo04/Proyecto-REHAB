@@ -2,7 +2,7 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 
-from config import (
+from scripts.config import (
     DATASET_CSV,
     SEMILLA
 )

@@ -3,8 +3,7 @@ import csv
 import math
 import numpy as np
 
-DATASET_DIR = "Dataset"
-OUTPUT_CSV = "dataset_ml_ventanas.csv"
+from scripts.config import DATASET_DIR, DATASET_CSV as OUTPUT_CSV
 
 NUM_ACTIVIDADES = 16
 NUM_VENTANAS = 4
