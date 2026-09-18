@@ -53,6 +53,8 @@ Proyecto-REHAB/
 ├── knn.py                        # Modelo 4 · K-Nearest Neighbors
 ├── random-forest.py              # Modelo 5 · Random Forest  seleccionado
 │
+├── webapp/                       # GUI: FastAPI + React para entrenar y comparar modelos
+│
 ├── requirements.txt              # numpy, pandas, scikit-learn
 ├── .gitignore                    # .venv/ y __pycache__/
 └── README.md
@@ -480,6 +482,14 @@ Cada script imprime, en este orden:
 6. Las primeras 20 predicciones frente a su valor real.
 
 Gracias a la semilla fija (`SEMILLA = 42` en `config.py`) los resultados son **reproducibles** y coinciden con los reportados en este documento.
+
+### Paso 3 · Interfaz web (opcional)
+
+`webapp/` contiene una GUI (FastAPI + React) para entrenar cada modelo con distintos hiperparámetros desde el navegador y comparar visualmente los resultados: ranking, veredicto, matriz de confusión y F1 por actividad. Ver [webapp/README.md](webapp/README.md).
+
+```bash
+./webapp/dev.sh        # http://localhost:5173
+```
 
 > `random-forest.py` muestra una advertencia de scikit-learn (`X has feature names, but RandomForestClassifier was fitted without feature names`). Ocurre porque el modelo final se entrena con arreglos de NumPy (train + val concatenados) y se evalúa con un DataFrame. Es inofensiva y no afecta los resultados.
 
