@@ -3,6 +3,7 @@
 #   make install   crea .venv e instala todas las dependencias (proyecto + webapp)
 #   make models    entrena y evalúa los cinco modelos desde la terminal
 #   make model M=knn  entrena solo uno (logreg | tree | bayes | knn | rf)
+#   make report    ejecuta los cinco modelos y construye output/pdf/rehab_project_complete.pdf
 #   make help      lista todos los targets
 
 PYTHON   ?= python3
@@ -12,7 +13,7 @@ BPY      := $(abspath $(PY))          # ruta absoluta: los targets del backend h
 BACKEND  := webapp/backend
 FRONTEND := webapp/frontend
 
-.PHONY: help dev backend frontend install venv deps-py deps-web dataset models model clean
+.PHONY: help dev backend frontend install venv deps-py deps-web dataset models model report clean
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
@@ -71,6 +72,15 @@ models: deps-py ## entrena y evalúa los cinco modelos (rf, knn, logreg, tree, b
 model: deps-py ## entrena un modelo: make model M=knn  (logreg | tree | bayes | knn | rf)
 	@test -n "$(SCRIPT_$(M))" || { echo "Uso: make model M=<logreg|tree|bayes|knn|rf>"; exit 1; }
 	cd $(BACKEND) && $(BPY) -m ml.$(SCRIPT_$(M))
+
+# ---------- reporte ----------
+
+$(VENV)/.deps-report: $(VENV)/.deps-py report/requirements.txt
+	$(PY) -m pip install -r report/requirements.txt
+	@touch $@
+
+report: $(VENV)/.deps-report ## ejecuta los cinco modelos y construye el PDF (REPORT_FLAGS=--no-exec reutiliza output/logs/)
+	$(PY) report/build_report.py $(REPORT_FLAGS)
 
 clean: ## borra .venv, node_modules y __pycache__
 	rm -rf $(VENV) $(FRONTEND)/node_modules

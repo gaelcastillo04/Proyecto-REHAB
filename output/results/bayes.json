@@ -1,0 +1,676 @@
+{
+  "grid": [
+    {
+      "params": {
+        "var_smoothing": "1e-09",
+        "priors": "None",
+        "escalar": "False"
+      },
+      "accuracy": 0.7582,
+      "f1_macro": 0.755,
+      "cross_entropy": 7.5785
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-09",
+        "priors": "None",
+        "escalar": "True"
+      },
+      "accuracy": 0.7582,
+      "f1_macro": 0.755,
+      "cross_entropy": 7.5785
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-09",
+        "priors": "uniforme",
+        "escalar": "False"
+      },
+      "accuracy": 0.7582,
+      "f1_macro": 0.7551,
+      "cross_entropy": 7.581
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-09",
+        "priors": "uniforme",
+        "escalar": "True"
+      },
+      "accuracy": 0.7582,
+      "f1_macro": 0.7551,
+      "cross_entropy": 7.581
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-06",
+        "priors": "None",
+        "escalar": "False"
+      },
+      "accuracy": 0.7582,
+      "f1_macro": 0.755,
+      "cross_entropy": 7.5933
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-06",
+        "priors": "None",
+        "escalar": "True"
+      },
+      "accuracy": 0.7582,
+      "f1_macro": 0.755,
+      "cross_entropy": 7.5795
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-06",
+        "priors": "uniforme",
+        "escalar": "False"
+      },
+      "accuracy": 0.7582,
+      "f1_macro": 0.755,
+      "cross_entropy": 7.5958
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-06",
+        "priors": "uniforme",
+        "escalar": "True"
+      },
+      "accuracy": 0.7582,
+      "f1_macro": 0.7551,
+      "cross_entropy": 7.582
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-03",
+        "priors": "None",
+        "escalar": "False"
+      },
+      "accuracy": 0.7314,
+      "f1_macro": 0.7254,
+      "cross_entropy": 8.0278
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-03",
+        "priors": "None",
+        "escalar": "True"
+      },
+      "accuracy": 0.7495999999999999,
+      "f1_macro": 0.7457,
+      "cross_entropy": 7.7701
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-03",
+        "priors": "uniforme",
+        "escalar": "False"
+      },
+      "accuracy": 0.7304999999999999,
+      "f1_macro": 0.7246,
+      "cross_entropy": 8.0326
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-03",
+        "priors": "uniforme",
+        "escalar": "True"
+      },
+      "accuracy": 0.7495999999999999,
+      "f1_macro": 0.7457,
+      "cross_entropy": 7.7728
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-01",
+        "priors": "None",
+        "escalar": "False"
+      },
+      "accuracy": 0.6274000000000001,
+      "f1_macro": 0.6079,
+      "cross_entropy": 7.1405
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-01",
+        "priors": "None",
+        "escalar": "True"
+      },
+      "accuracy": 0.701,
+      "f1_macro": 0.6922,
+      "cross_entropy": 8.33
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-01",
+        "priors": "uniforme",
+        "escalar": "False"
+      },
+      "accuracy": 0.6265,
+      "f1_macro": 0.6071,
+      "cross_entropy": 7.1726
+    },
+    {
+      "params": {
+        "var_smoothing": "1e-01",
+        "priors": "uniforme",
+        "escalar": "True"
+      },
+      "accuracy": 0.7001999999999999,
+      "f1_macro": 0.6912,
+      "cross_entropy": 8.3423
+    }
+  ],
+  "best": {
+    "Var smoothing": "1e-09",
+    "Priors": "uniforme",
+    "Escalar": "False",
+    "F1-score": "0.7551"
+  },
+  "best_val_f1": 0.7551,
+  "test": {
+    "accuracy": 0.747,
+    "precision_macro": 0.7634,
+    "recall_macro": 0.751,
+    "f1_macro": 0.7406
+  },
+  "per_class": {
+    "0": {
+      "precision": 0.8261,
+      "recall": 0.9828,
+      "f1": 0.8976,
+      "support": 58
+    },
+    "1": {
+      "precision": 0.6667,
+      "recall": 0.8679,
+      "f1": 0.7541,
+      "support": 53
+    },
+    "2": {
+      "precision": 0.7869,
+      "recall": 0.7273,
+      "f1": 0.7559,
+      "support": 66
+    },
+    "3": {
+      "precision": 0.9423,
+      "recall": 0.7903,
+      "f1": 0.8596,
+      "support": 62
+    },
+    "4": {
+      "precision": 0.9388,
+      "recall": 0.6389,
+      "f1": 0.7603,
+      "support": 72
+    },
+    "5": {
+      "precision": 0.7667,
+      "recall": 0.9452,
+      "f1": 0.8466,
+      "support": 73
+    },
+    "6": {
+      "precision": 0.5253,
+      "recall": 0.8,
+      "f1": 0.6341,
+      "support": 65
+    },
+    "7": {
+      "precision": 0.8854,
+      "recall": 0.8763,
+      "f1": 0.8808,
+      "support": 97
+    },
+    "8": {
+      "precision": 0.6596,
+      "recall": 0.8267,
+      "f1": 0.7337,
+      "support": 75
+    },
+    "9": {
+      "precision": 0.5244,
+      "recall": 0.5584,
+      "f1": 0.5409,
+      "support": 77
+    },
+    "10": {
+      "precision": 0.9524,
+      "recall": 0.7692,
+      "f1": 0.8511,
+      "support": 78
+    },
+    "11": {
+      "precision": 0.7183,
+      "recall": 0.8644,
+      "f1": 0.7846,
+      "support": 59
+    },
+    "12": {
+      "precision": 0.6316,
+      "recall": 0.3288,
+      "f1": 0.4324,
+      "support": 73
+    },
+    "13": {
+      "precision": 0.8649,
+      "recall": 0.4103,
+      "f1": 0.5565,
+      "support": 78
+    },
+    "14": {
+      "precision": 0.713,
+      "recall": 0.9111,
+      "f1": 0.8,
+      "support": 90
+    },
+    "15": {
+      "precision": 0.8116,
+      "recall": 0.7179,
+      "f1": 0.7619,
+      "support": 78
+    }
+  },
+  "confusion_matrix": [
+    [
+      57,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      46,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      5,
+      48,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      5,
+      5,
+      49,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      46,
+      18,
+      1,
+      2,
+      0,
+      0,
+      0,
+      5,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      1,
+      69,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      52,
+      0,
+      0,
+      1,
+      0,
+      2,
+      6,
+      0,
+      0,
+      3
+    ],
+    [
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      3,
+      85,
+      0,
+      4,
+      0,
+      1,
+      0,
+      0,
+      2,
+      0
+    ],
+    [
+      4,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      62,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      27,
+      43,
+      0,
+      0,
+      1,
+      0,
+      0,
+      3
+    ],
+    [
+      0,
+      7,
+      3,
+      0,
+      0,
+      1,
+      0,
+      2,
+      3,
+      2,
+      60,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      2,
+      0,
+      5,
+      0,
+      0,
+      0,
+      51,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      33,
+      2,
+      0,
+      7,
+      0,
+      5,
+      24,
+      0,
+      0,
+      2
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      5,
+      0,
+      0,
+      3,
+      0,
+      2,
+      2,
+      32,
+      31,
+      3
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      5,
+      82,
+      0
+    ],
+    [
+      1,
+      2,
+      0,
+      0,
+      2,
+      0,
+      2,
+      0,
+      0,
+      9,
+      0,
+      1,
+      5,
+      0,
+      0,
+      56
+    ]
+  ],
+  "predictions": [
+    [
+      0,
+      8,
+      8
+    ],
+    [
+      1,
+      8,
+      8
+    ],
+    [
+      2,
+      15,
+      6
+    ],
+    [
+      3,
+      15,
+      15
+    ],
+    [
+      4,
+      14,
+      14
+    ],
+    [
+      5,
+      11,
+      11
+    ],
+    [
+      6,
+      10,
+      10
+    ],
+    [
+      7,
+      8,
+      8
+    ],
+    [
+      8,
+      13,
+      14
+    ],
+    [
+      9,
+      0,
+      0
+    ],
+    [
+      10,
+      2,
+      2
+    ],
+    [
+      11,
+      9,
+      6
+    ],
+    [
+      12,
+      2,
+      2
+    ],
+    [
+      13,
+      9,
+      9
+    ],
+    [
+      14,
+      12,
+      9
+    ],
+    [
+      15,
+      5,
+      5
+    ],
+    [
+      16,
+      6,
+      12
+    ],
+    [
+      17,
+      14,
+      14
+    ],
+    [
+      18,
+      5,
+      5
+    ],
+    [
+      19,
+      14,
+      14
+    ]
+  ],
+  "split": {
+    "train": 2308,
+    "val": 1154,
+    "test": 1154
+  },
+  "key": "bayes",
+  "module": "bayes",
+  "name": "Naive Bayes gaussiano",
+  "short": "Bayes"
+}

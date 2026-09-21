@@ -1,0 +1,104 @@
+/Users/daif/Code/Tec/Semestre_7/Proyecto-REHAB/.venv/lib/python3.14/site-packages/sklearn/utils/validation.py:2823: UserWarning: X has feature names, but StandardScaler was fitted without feature names
+  warnings.warn(
+K-Nearest Neighbors (KNN)
+Division del conjunto de datos:50% train, 25% validacion, 25% test
+==================================================
+Muestras totales: 4616
+Caracteristicas: 480
+Clases: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15]
+
+Division del dataset
+Entrenamiento: 2308
+Validacion: 1154
+Test: 1154
+Busqueda de hiperparametros:
+
+K=1  | pesos=uniform  | Accuracy=90.81% | F1-macro=0.9043 | Cross-Entropy=3.3108
+K=1  | pesos=distance | Accuracy=90.81% | F1-macro=0.9043 | Cross-Entropy=3.3108
+K=3  | pesos=uniform  | Accuracy=82.06% | F1-macro=0.8183 | Cross-Entropy=2.0604
+K=3  | pesos=distance | Accuracy=86.83% | F1-macro=0.8648 | Cross-Entropy=2.0127
+K=5  | pesos=uniform  | Accuracy=78.34% | F1-macro=0.7832 | Cross-Entropy=1.5752
+K=5  | pesos=distance | Accuracy=84.23% | F1-macro=0.8407 | Cross-Entropy=1.5040
+K=7  | pesos=uniform  | Accuracy=75.91% | F1-macro=0.7583 | Cross-Entropy=1.3883
+K=7  | pesos=distance | Accuracy=81.63% | F1-macro=0.8143 | Cross-Entropy=1.2994
+K=9  | pesos=uniform  | Accuracy=75.22% | F1-macro=0.7514 | Cross-Entropy=1.2185
+K=9  | pesos=distance | Accuracy=80.59% | F1-macro=0.8040 | Cross-Entropy=1.1171
+
+Mejor configuracion:
+
+K: 1
+Pesos: uniform
+F1-score: 0.9043
+
+Resultados finales en Test:
+
+Accuracy: 92.89%
+Precision macro: 0.9332
+Recall macro: 0.9304
+F1-macro: 0.9291
+
+Reporte por clase:
+
+              precision    recall  f1-score   support
+
+           0     0.9831    1.0000    0.9915        58
+           1     0.6582    0.9811    0.7879        53
+           2     0.9130    0.9545    0.9333        66
+           3     0.9516    0.9516    0.9516        62
+           4     0.9688    0.8611    0.9118        72
+           5     0.9855    0.9315    0.9577        73
+           6     0.9839    0.9385    0.9606        65
+           7     0.8942    0.9588    0.9254        97
+           8     0.9444    0.9067    0.9252        75
+           9     0.9211    0.9091    0.9150        77
+          10     0.9459    0.8974    0.9211        78
+          11     0.9649    0.9322    0.9483        59
+          12     0.9538    0.8493    0.8986        73
+          13     0.9459    0.8974    0.9211        78
+          14     0.9556    0.9556    0.9556        90
+          15     0.9615    0.9615    0.9615        78
+
+    accuracy                         0.9289      1154
+   macro avg     0.9332    0.9304    0.9291      1154
+weighted avg     0.9362    0.9289    0.9304      1154
+
+Matriz de confusion
+[[58  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ [ 0 52  0  1  0  0  0  0  0  0  0  0  0  0  0  0]
+ [ 0  3 63  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ [ 0  1  1 59  0  0  0  1  0  0  0  0  0  0  0  0]
+ [ 0  5  0  0 62  1  0  3  0  0  1  0  0  0  0  0]
+ [ 0  2  0  0  2 68  0  0  0  0  0  1  0  0  0  0]
+ [ 0  2  0  0  0  0 61  1  0  0  0  0  1  0  0  0]
+ [ 0  1  0  0  0  0  0 93  0  0  3  0  0  0  0  0]
+ [ 0  0  1  0  0  0  0  0 68  6  0  0  0  0  0  0]
+ [ 0  0  3  0  0  0  0  0  3 70  0  0  1  0  0  0]
+ [ 1  4  1  0  0  0  0  0  0  0 70  0  0  0  0  2]
+ [ 0  3  0  0  0  0  0  1  0  0  0 55  0  0  0  0]
+ [ 0  4  0  2  0  0  1  1  0  0  0  1 62  2  0  0]
+ [ 0  1  0  0  0  0  0  0  1  0  0  0  1 70  4  1]
+ [ 0  0  0  0  0  0  0  2  0  0  0  0  0  2 86  0]
+ [ 0  1  0  0  0  0  0  2  0  0  0  0  0  0  0 75]]
+
+Primeras 20 predicciones:
+
+Muestra 000 | Real: 08 | Prediccion: 08
+Muestra 001 | Real: 08 | Prediccion: 08
+Muestra 002 | Real: 15 | Prediccion: 15
+Muestra 003 | Real: 15 | Prediccion: 15
+Muestra 004 | Real: 14 | Prediccion: 14
+Muestra 005 | Real: 11 | Prediccion: 11
+Muestra 006 | Real: 10 | Prediccion: 10
+Muestra 007 | Real: 08 | Prediccion: 08
+Muestra 008 | Real: 13 | Prediccion: 13
+Muestra 009 | Real: 00 | Prediccion: 00
+Muestra 010 | Real: 02 | Prediccion: 02
+Muestra 011 | Real: 09 | Prediccion: 09
+Muestra 012 | Real: 02 | Prediccion: 02
+Muestra 013 | Real: 09 | Prediccion: 09
+Muestra 014 | Real: 12 | Prediccion: 13
+Muestra 015 | Real: 05 | Prediccion: 05
+Muestra 016 | Real: 06 | Prediccion: 06
+Muestra 017 | Real: 14 | Prediccion: 14
+Muestra 018 | Real: 05 | Prediccion: 05
+Muestra 019 | Real: 14 | Prediccion: 14

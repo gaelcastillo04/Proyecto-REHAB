@@ -1,0 +1,132 @@
+/Users/daif/Code/Tec/Semestre_7/Proyecto-REHAB/.venv/lib/python3.14/site-packages/sklearn/utils/validation.py:2823: UserWarning: X has feature names, but RandomForestClassifier was fitted without feature names
+  warnings.warn(
+Random Forest
+Division del conjunto de datos:50% train, 25% validacion, 25% test
+==================================================
+Muestras totales: 4616
+Caracteristicas: 480
+Clases: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15]
+
+Division del dataset
+Entrenamiento: 2308
+Validacion: 1154
+Test: 1154
+Busqueda de hiperparametros:
+
+n_estimators=50  | depth=None | min_split=2  | class_weight=None     | Accuracy=94.54% | F1-macro=0.9409
+n_estimators=50  | depth=None | min_split=2  | class_weight=balanced | Accuracy=95.93% | F1-macro=0.9567
+n_estimators=50  | depth=None | min_split=5  | class_weight=None     | Accuracy=95.58% | F1-macro=0.9528
+n_estimators=50  | depth=None | min_split=5  | class_weight=balanced | Accuracy=95.15% | F1-macro=0.9485
+n_estimators=50  | depth=10   | min_split=2  | class_weight=None     | Accuracy=94.71% | F1-macro=0.9440
+n_estimators=50  | depth=10   | min_split=2  | class_weight=balanced | Accuracy=95.67% | F1-macro=0.9533
+n_estimators=50  | depth=10   | min_split=5  | class_weight=None     | Accuracy=94.54% | F1-macro=0.9413
+n_estimators=50  | depth=10   | min_split=5  | class_weight=balanced | Accuracy=94.28% | F1-macro=0.9396
+n_estimators=50  | depth=20   | min_split=2  | class_weight=None     | Accuracy=94.54% | F1-macro=0.9409
+n_estimators=50  | depth=20   | min_split=2  | class_weight=balanced | Accuracy=95.93% | F1-macro=0.9567
+n_estimators=50  | depth=20   | min_split=5  | class_weight=None     | Accuracy=95.58% | F1-macro=0.9528
+n_estimators=50  | depth=20   | min_split=5  | class_weight=balanced | Accuracy=95.15% | F1-macro=0.9485
+n_estimators=100 | depth=None | min_split=2  | class_weight=None     | Accuracy=96.01% | F1-macro=0.9571
+n_estimators=100 | depth=None | min_split=2  | class_weight=balanced | Accuracy=96.53% | F1-macro=0.9631
+n_estimators=100 | depth=None | min_split=5  | class_weight=None     | Accuracy=96.01% | F1-macro=0.9575
+n_estimators=100 | depth=None | min_split=5  | class_weight=balanced | Accuracy=95.93% | F1-macro=0.9564
+n_estimators=100 | depth=10   | min_split=2  | class_weight=None     | Accuracy=95.41% | F1-macro=0.9511
+n_estimators=100 | depth=10   | min_split=2  | class_weight=balanced | Accuracy=95.93% | F1-macro=0.9567
+n_estimators=100 | depth=10   | min_split=5  | class_weight=None     | Accuracy=94.89% | F1-macro=0.9451
+n_estimators=100 | depth=10   | min_split=5  | class_weight=balanced | Accuracy=94.89% | F1-macro=0.9458
+n_estimators=100 | depth=20   | min_split=2  | class_weight=None     | Accuracy=96.01% | F1-macro=0.9571
+n_estimators=100 | depth=20   | min_split=2  | class_weight=balanced | Accuracy=96.53% | F1-macro=0.9631
+n_estimators=100 | depth=20   | min_split=5  | class_weight=None     | Accuracy=96.01% | F1-macro=0.9575
+n_estimators=100 | depth=20   | min_split=5  | class_weight=balanced | Accuracy=95.93% | F1-macro=0.9564
+n_estimators=200 | depth=None | min_split=2  | class_weight=None     | Accuracy=96.01% | F1-macro=0.9574
+n_estimators=200 | depth=None | min_split=2  | class_weight=balanced | Accuracy=96.19% | F1-macro=0.9591
+n_estimators=200 | depth=None | min_split=5  | class_weight=None     | Accuracy=95.93% | F1-macro=0.9566
+n_estimators=200 | depth=None | min_split=5  | class_weight=balanced | Accuracy=96.36% | F1-macro=0.9611
+n_estimators=200 | depth=10   | min_split=2  | class_weight=None     | Accuracy=95.58% | F1-macro=0.9525
+n_estimators=200 | depth=10   | min_split=2  | class_weight=balanced | Accuracy=95.75% | F1-macro=0.9544
+n_estimators=200 | depth=10   | min_split=5  | class_weight=None     | Accuracy=95.32% | F1-macro=0.9500
+n_estimators=200 | depth=10   | min_split=5  | class_weight=balanced | Accuracy=95.49% | F1-macro=0.9517
+n_estimators=200 | depth=20   | min_split=2  | class_weight=None     | Accuracy=96.01% | F1-macro=0.9574
+n_estimators=200 | depth=20   | min_split=2  | class_weight=balanced | Accuracy=96.19% | F1-macro=0.9591
+n_estimators=200 | depth=20   | min_split=5  | class_weight=None     | Accuracy=95.93% | F1-macro=0.9566
+n_estimators=200 | depth=20   | min_split=5  | class_weight=balanced | Accuracy=96.36% | F1-macro=0.9611
+
+Mejor configuracion:
+
+N estimators: 100
+Max depth: None
+Min samples split: 2
+Class weight: balanced
+F1-score: 0.9631
+
+Resultados finales en Test:
+
+Accuracy: 95.67%
+Precision macro: 0.9576
+Recall macro: 0.9570
+F1-macro: 0.9556
+
+Reporte por clase:
+
+              precision    recall  f1-score   support
+
+           0     1.0000    1.0000    1.0000        58
+           1     0.9123    0.9811    0.9455        53
+           2     0.9844    0.9545    0.9692        66
+           3     1.0000    0.9516    0.9752        62
+           4     1.0000    0.9167    0.9565        72
+           5     0.9861    0.9726    0.9793        73
+           6     0.9545    0.9692    0.9618        65
+           7     1.0000    0.9897    0.9948        97
+           8     0.8889    0.9600    0.9231        75
+           9     0.9444    0.8831    0.9128        77
+          10     0.9500    0.9744    0.9620        78
+          11     0.7662    1.0000    0.8676        59
+          12     0.9688    0.8493    0.9051        73
+          13     1.0000    0.9359    0.9669        78
+          14     0.9783    1.0000    0.9890        90
+          15     0.9870    0.9744    0.9806        78
+
+    accuracy                         0.9567      1154
+   macro avg     0.9576    0.9570    0.9556      1154
+weighted avg     0.9608    0.9567    0.9572      1154
+
+Matriz de confusion
+[[58  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]
+ [ 0 52  0  0  0  0  0  0  0  0  0  1  0  0  0  0]
+ [ 0  2 63  0  0  0  0  0  0  0  0  1  0  0  0  0]
+ [ 0  2  0 59  0  0  0  0  0  0  1  0  0  0  0  0]
+ [ 0  0  0  0 66  1  0  0  0  0  0  5  0  0  0  0]
+ [ 0  0  0  0  0 71  0  0  0  0  0  2  0  0  0  0]
+ [ 0  0  0  0  0  0 63  0  0  0  0  2  0  0  0  0]
+ [ 0  0  0  0  0  0  0 96  0  0  0  1  0  0  0  0]
+ [ 0  0  0  0  0  0  0  0 72  3  0  0  0  0  0  0]
+ [ 0  0  0  0  0  0  0  0  9 68  0  0  0  0  0  0]
+ [ 0  1  1  0  0  0  0  0  0  0 76  0  0  0  0  0]
+ [ 0  0  0  0  0  0  0  0  0  0  0 59  0  0  0  0]
+ [ 0  0  0  0  0  0  3  0  0  1  2  4 62  0  0  1]
+ [ 0  0  0  0  0  0  0  0  0  0  0  1  2 73  2  0]
+ [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0 90  0]
+ [ 0  0  0  0  0  0  0  0  0  0  1  1  0  0  0 76]]
+
+Primeras 20 predicciones:
+
+Muestra 000 | Real: 08 | Prediccion: 08
+Muestra 001 | Real: 08 | Prediccion: 08
+Muestra 002 | Real: 15 | Prediccion: 15
+Muestra 003 | Real: 15 | Prediccion: 15
+Muestra 004 | Real: 14 | Prediccion: 14
+Muestra 005 | Real: 11 | Prediccion: 11
+Muestra 006 | Real: 10 | Prediccion: 10
+Muestra 007 | Real: 08 | Prediccion: 08
+Muestra 008 | Real: 13 | Prediccion: 13
+Muestra 009 | Real: 00 | Prediccion: 00
+Muestra 010 | Real: 02 | Prediccion: 02
+Muestra 011 | Real: 09 | Prediccion: 09
+Muestra 012 | Real: 02 | Prediccion: 02
+Muestra 013 | Real: 09 | Prediccion: 09
+Muestra 014 | Real: 12 | Prediccion: 12
+Muestra 015 | Real: 05 | Prediccion: 05
+Muestra 016 | Real: 06 | Prediccion: 06
+Muestra 017 | Real: 14 | Prediccion: 14
+Muestra 018 | Real: 05 | Prediccion: 05
+Muestra 019 | Real: 14 | Prediccion: 14
