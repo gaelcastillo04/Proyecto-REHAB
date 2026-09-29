@@ -44,7 +44,7 @@ def crear_modelo(k, pesos):
 def seleccionar_hiperparametros(X_train, y_train, X_val, y_val):
     mejor_f1=-1.0
     mejor_k=None
-    mejores_pesos=None
+    mejores_pesos=0
 
     print("Busqueda de hiperparametros:\n")
 
